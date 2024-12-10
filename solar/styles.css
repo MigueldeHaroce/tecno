@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --primary-color: #2F4671;
+    --background-color: #0C1017;
+    --letters-color: #d3d6de;
+    --secondary-color: #79A5F7;
+}
+
+
+body {
+    background-color: var(--background-color);
+    color: var(--letters-color);
+    font-family: 'Inter', sans-serif;
+}
+
+#data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    gap: 80px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 360px;
+    height: 240px;
+    background-color: var(--primary-color);
+    border-radius: 25px;
+
+}
+
+.data {
+  
+}
+.header {
+  font-size: 64px !important;
+}
+
+.descriptor {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+
+
+/* 
+@media (max-width: 768px) {
+    #data {
+        flex-direction: column;
+        margin-top: 50px;
+        gap: 40px;
+    }
+
+    .container {
+        width: 300px;
+        height: 200px;
+    }
+}
+
+/*  
+@media (max-width: 480px) {
+    #data {
+        flex-direction: column;
+        margin-top: 20px;
+        gap: 20px;
+    }
+
+    .container {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+}
+
+*/
+
+#stats {
+  margin: 100px;
+}
+
+#my-chart {
+
+}
+
+
+#my-chart {
+  width: 100%;
+  max-width: 80%;
+  margin: 0 auto;
+}
+#my-chart .column {
+  --aspect-ratio: 4 / 1;
+  --color: var(--secondary-color);
+}
+
+
+
+
+
+.menu {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-color);
+  padding: 10px 20px;
+  border-radius: 50px;
+  width: 200px;
+}
+
+.arrow {
+  background: none;
+  border: none;
+  color: var(--letters-color);
+  font-size: 24px;
+  cursor: pointer;
+  outline: none;
+}
+
+.dots {
+  display: flex;
+  gap: 10px;
+  margin: 0 20px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: #64729b;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: #d3d6de;
+}
