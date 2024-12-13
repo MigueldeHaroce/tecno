@@ -13,33 +13,54 @@
     <div id="mainContainer">
         <div id="data">
             <div id="temp" class="container">
-                <span id="tempValue" class="header"></span>
+                <div class="text">
+                    <span id="tempValue" class="header"></span>
+                    <span id="unit">ºC</span>
+                </div>
                 <span class="descriptor">Temperatura</span>
             </div>
             <div id="luz" class="container">
-                <span id="luzValue" class="header"></span>
+                <div class="text">
+                    <span id="luzValue" class="header"></span>
+                    <span id="unit">W/m²</span>
+                </div>
                 <span class="descriptor">Llum solar rebuda</span>
             </div>
             <div id="energia" class="container">
-                <span id="energiaValue" class="header"></span>
+                <div class="text">
+                    
+                    <span id="energiaValue" class="header"></span>
+                    <span id="unit">W</span>
+                </div>
                 <span class="descriptor">Producció</span>
             </div>
         </div>
         <div id="stats">
-            <div id="my-chart">
-                <table class="charts-css column data-spacing-10">
-                    <tr> <td style="--size: 0.9"> <span class="data"> $ 40K </span> </td> </tr>
-                    <tr> <td style="--size: 0.4"> <span class="data"> $ 40K </span> </td> </tr>
-                    <tr> <td style="--size: 0.6"> <span class="data"> $ 40K </span> </td> </tr>
-                    <tr> <td style="--size: 0.8"> <span class="data"> $ 40K </span> </td> </tr>
-                    <tr> <td style="--size: 0.9"> <span class="data"> $ 40K </span> </td> </tr>
-                    <tr> <td style="--size: 0.4"> <span class="data"> $ 40K </span> </td> </tr>
-                    <tr> <td style="--size: 0.6"> <span class="data"> $ 40K </span> </td> </tr>
-                    <tr> <td style="--size: 0.8"> <span class="data"> $ 40K </span> </td> </tr>
-                    <tr> <td style="--size: 0.9"> <span class="data"> $ 40K </span> </td> </tr>
-                    <tr> <td style="--size: 0.4"> <span class="data"> $ 40K </span> </td> </tr>
-                    <tr> <td style="--size: 0.6"> <span class="data"> $ 40K </span> </td> </tr>
-                    <tr> <td style="--size: 0.8"> <span class="data"> $ 40K </span> </td> </tr>
+            <div id="chart-temp" class="my-chart">
+                <table class="charts-css column data-spacing-15">
+                    <tr> <td> <span class="data"></span> </td> </tr>
+                    <tr> <td> <span class="data"></span> </td> </tr>
+                    <tr> <td> <span class="data"> </span> </td> </tr>
+                    <tr> <td> <span class="data"> </span> </td> </tr>
+                    <tr> <td> <span class="data"> </span> </td> </tr>
+                </table>
+            </div>
+            <div id="chart-luz" class="my-chart" style="display: none;">
+                <table class="charts-css column data-spacing-15">
+                    <tr> <td> <span class="data"></span> </td> </tr>
+                    <tr> <td> <span class="data"></span> </td> </tr>
+                    <tr> <td> <span class="data"> </span> </td> </tr>
+                    <tr> <td> <span class="data"> </span> </td> </tr>
+                    <tr> <td> <span class="data"> </span> </td> </tr>
+                </table>
+            </div>
+            <div id="chart-energia" class="my-chart" style="display: none;">
+                <table class="charts-css column data-spacing-15">
+                    <tr> <td> <span class="data"></span> </td> </tr>
+                    <tr> <td> <span class="data"></span> </td> </tr>
+                    <tr> <td> <span class="data"> </span> </td> </tr>
+                    <tr> <td> <span class="data"> </span> </td> </tr>
+                    <tr> <td> <span class="data"> </span> </td> </tr>
                 </table>
             </div>
 
@@ -57,18 +78,21 @@
     <?php
         // sqlite connection
         $db = new PDO('sqlite:' . 'solar.db');
-        $res = $db->query('SELECT * FROM datosSolar');  
-        $max_row = $res->fetch(PDO::FETCH_ASSOC);
+        $hour = '12:00:00'; // Specify the hour you want to fetch data for
+        $hour_start = '11:30:00'; // Start of the range
+        $hour_end = '11:35:00'; // End of the range
+        $res = $db->query("SELECT * FROM lectures WHERE hora BETWEEN '$hour_start' AND '$hour_end' ORDER BY data DESC LIMIT 120");
+        $rows = $res->fetchAll(PDO::FETCH_ASSOC);
         // for js
-        $data = json_encode($max_row);
+        $data = json_encode($rows);
     ?>
     <script>
         // inner html with php
         var data = <?php echo $data; ?>;
         
-        document.getElementById('tempValue').innerHTML += data.temp += " ºC";
-        document.getElementById('luzValue').innerHTML += data.luz += " W/m²";
-        document.getElementById('energiaValue').innerHTML += data.energia += " W";
+        document.getElementById('tempValue').innerHTML += Math.round(data[0].temperatura);
+        document.getElementById('luzValue').innerHTML += Math.round(data[0].intensitat);
+        document.getElementById('energiaValue').innerHTML += Math.round(data[0].produccio);
     </script>
     <script src="index.js"></script>
     <script src="ajax.js"></script>

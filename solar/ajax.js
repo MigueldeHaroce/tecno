@@ -7,10 +7,10 @@ $('.button').click(function(event) {
     $.ajax({
         type: "POST",
         url: "index.php",
-        data: { name: name, action: action }
+        data: { action: 'fetch_latest_data' }
     }).done(function(response) {
-    
-        $('body').append(response);
+        var data = JSON.parse(response);
+        updateChartData(data);
         console.log(response);
     });
 });
