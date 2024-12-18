@@ -12,17 +12,21 @@ body {
     color: var(--letters-color);
     font-family: 'Inter', sans-serif; 
     overflow: hidden;
+    min-width: 400px;
 
+}
+
+#mainContainer {
+    margin: 50px;
 }
 
 #data {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin-top: 60px;
     gap: 80px;
-    margin-left: 100px;
-    margin-right: 100px;
+
 }
 
 .container {
@@ -60,25 +64,14 @@ body {
     font-weight: 300;
 }
 
-@media (max-width: 1024px) {
-    #data {
-        margin-left: 50px;
-        margin-right: 50px;
+@media (max-width: 800px) {
+    body {
+        overflow: auto;
     }
-    .container {
-        width: 320px;
-        height: 220px;
-    }
-    .header {
-        font-size: 54px !important;
-    }
-}
-
-@media (max-width: 768px) {
     #data {
         flex-direction: column;
-        margin-top: 50px;
-        gap: 40px;
+        margin-top: 10px;
+        gap: 20px;
     }
 
     #mainContainer {
@@ -98,24 +91,11 @@ body {
     .descriptor {
         display: none;
     }
-    #stats {
-        display: none;
+    #dataContainer {
+        display: none !important;
     }
 }
 
-@media (max-width: 480px) {
-    #data {
-        flex-direction: column;
-        margin-top: 20px;
-        gap: 20px;
-    }
-
-    .container {
-        width: 100%;
-        height: auto;
-        padding: 20px;
-    }
-}
 
 #dataContainer {
     display: flex;
@@ -123,8 +103,7 @@ body {
     align-items: center;
     gap: 20px;
     flex-direction: row;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-top: 30px !important;
 }
 
 #tableContainer {
@@ -132,21 +111,24 @@ body {
     border-radius: 25px;
     padding: 20px;
     width: 50%;
+    max-height: 262.5px;
+    overflow: auto;
 }
 
 #stats {
-    margin-top: 50px !important;
     display: flex;
     align-items: center;
     flex-direction: column;
     background-color: rgba(255, 255, 255, 0.03);
     width: 50%;
-
+    border-radius: 25px;
+    height: max-content;
 }
 
 .my-chart {
     width: 350px;
-    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
     display: flex;
 }
 
@@ -156,7 +138,7 @@ body {
 }
 
 .menu {
-    margin-top: -10px;
+    margin-bottom: -20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -164,6 +146,8 @@ body {
     padding: 10px 20px;
     border-radius: 50px;
     width: 162px;
+    position: sticky;
+
 }
 
 .arrow {
@@ -191,4 +175,29 @@ body {
 
 .dot.active {
     background-color: #d3d6de;
+}
+
+#customers {
+    border-collapse: collapse;
+    width: 100%;
+    max-height: 100px;
+}
+  
+.tables td, .tables th {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 8px;
+    width: 100%;
+
+}
+  
+.tables tr:nth-child(even){background-color: #13171E;}
+.tables tr:nth-child(odd){background-color: #0C1017;}
+
+.tables tr:hover {background-color: #0C1017;}
+.tables tr:nth-child(odd):hover {background-color: #13171E;}
+
+.tables th {
+    text-align: left;
+    background-color: var(--primary-color);
+    color: var(--letters-color);
 }

@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div id="tableContainer">
-                <table>
+                <table class="tables">
                     <tr>
                         <th>Data</th>
                         <th>Temperatura</th>
@@ -84,11 +84,11 @@
                     <?php
                         // sqlite connection
                         $db = new PDO('sqlite:' . 'solar.db');
-                        $res = $db->query("SELECT * FROM lectures ORDER BY data DESC LIMIT 10");
+                        $res = $db->query("SELECT * FROM lectures ORDER BY data DESC");
                         $rows = $res->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($rows as $row) {
                             echo "<tr>";
-                            echo "<td>" . $row['data'] . "</td>";
+                            echo "<td>" . $row['data']." - ". $row['hora'] . "</td>";
                             echo "<td>" . $row['temperatura'] . "</td>";
                             echo "</tr>";
                         }   
