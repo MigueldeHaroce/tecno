@@ -35,43 +35,65 @@
                 <span class="descriptor">Producció</span>
             </div>
         </div>
-        <div id="stats">
-            <div id="chart-temp" class="my-chart">
-                <table class="charts-css column data-spacing-15">
-                    <tr> <td> <span class="data"></span> </td> </tr>
-                    <tr> <td> <span class="data"></span> </td> </tr>
-                    <tr> <td> <span class="data"> </span> </td> </tr>
-                    <tr> <td> <span class="data"> </span> </td> </tr>
-                    <tr> <td> <span class="data"> </span> </td> </tr>
-                </table>
-            </div>
-            <div id="chart-luz" class="my-chart" style="display: none;">
-                <table class="charts-css column data-spacing-15">
-                    <tr> <td> <span class="data"></span> </td> </tr>
-                    <tr> <td> <span class="data"></span> </td> </tr>
-                    <tr> <td> <span class="data"> </span> </td> </tr>
-                    <tr> <td> <span class="data"> </span> </td> </tr>
-                    <tr> <td> <span class="data"> </span> </td> </tr>
-                </table>
-            </div>
-            <div id="chart-energia" class="my-chart" style="display: none;">
-                <table class="charts-css column data-spacing-15">
-                    <tr> <td> <span class="data"></span> </td> </tr>
-                    <tr> <td> <span class="data"></span> </td> </tr>
-                    <tr> <td> <span class="data"> </span> </td> </tr>
-                    <tr> <td> <span class="data"> </span> </td> </tr>
-                    <tr> <td> <span class="data"> </span> </td> </tr>
-                </table>
-            </div>
-
-            <div class="menu">
-                <button class="arrow" id="prev">&larr;</button>
-                <div class="dots">
-                    <span class="dot active"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
+        <div id="dataContainer">
+            <div id="stats">
+                <div id="chart-temp" class="my-chart">
+                    <table class="charts-css column data-spacing-15">
+                        <tr> <td> <span class="data"></span> </td> </tr>
+                        <tr> <td> <span class="data"></span> </td> </tr>
+                        <tr> <td> <span class="data"> </span> </td> </tr>
+                        <tr> <td> <span class="data"> </span> </td> </tr>
+                        <tr> <td> <span class="data"> </span> </td> </tr>
+                    </table>
                 </div>
-                <button class="arrow" id="next">&rarr;</button>
+                <div id="chart-luz" class="my-chart" style="display: none;">
+                    <table class="charts-css column data-spacing-15">
+                        <tr> <td> <span class="data"></span> </td> </tr>
+                        <tr> <td> <span class="data"></span> </td> </tr>
+                        <tr> <td> <span class="data"> </span> </td> </tr>
+                        <tr> <td> <span class="data"> </span> </td> </tr>
+                        <tr> <td> <span class="data"> </span> </td> </tr>
+                    </table>
+                </div>
+                <div id="chart-energia" class="my-chart" style="display: none;">
+                    <table class="charts-css column data-spacing-15">
+                        <tr> <td> <span class="data"></span> </td> </tr>
+                        <tr> <td> <span class="data"></span> </td> </tr>
+                        <tr> <td> <span class="data"> </span> </td> </tr>
+                        <tr> <td> <span class="data"> </span> </td> </tr>
+                        <tr> <td> <span class="data"> </span> </td> </tr>
+                    </table>
+                </div>
+
+                <div class="menu">
+                    <button class="arrow" id="prev">&larr;</button>
+                    <div class="dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <button class="arrow" id="next">&rarr;</button>
+                </div>
+            </div>
+            <div id="tableContainer">
+                <table>
+                    <tr>
+                        <th>Data</th>
+                        <th>Temperatura</th>
+                    </tr>
+                    <?php
+                        // sqlite connection
+                        $db = new PDO('sqlite:' . 'solar.db');
+                        $res = $db->query("SELECT * FROM lectures ORDER BY data DESC LIMIT 10");
+                        $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+                        foreach ($rows as $row) {
+                            echo "<tr>";
+                            echo "<td>" . $row['data'] . "</td>";
+                            echo "<td>" . $row['temperatura'] . "</td>";
+                            echo "</tr>";
+                        }   
+                    ?>
+                </table>
             </div>
         </div>
     </div>
