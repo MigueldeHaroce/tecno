@@ -1,24 +1,3 @@
-const dots = document.querySelectorAll('.dot');
-const prevButton = document.getElementById('prev');
-const nextButton = document.getElementById('next');
-const charts = document.querySelectorAll('.my-chart');
-
-let currentIndex = 0;
-
-function updateDots() {
-  dots.forEach((dot, index) => {
-    dot.classList.toggle('active', index === currentIndex);
-  });
-}
-
-function updateCharts() {
-  charts.forEach((chart, index) => {
-    chart.style.display = index === currentIndex ? 'block' : 'none';
-  });
-}
-
-
-
 function updateChartData(data) {
   console.log(data);
   const chartTemp = document.querySelector('#chart-temp table');
@@ -29,45 +8,79 @@ function updateChartData(data) {
   const luzRows = chartLuz.querySelectorAll('tr');
   const energiaRows = chartEnergia.querySelectorAll('tr');
 
-  console.log(tempRows);
+  const desiredMin = 0.1;
+  const desiredMax = 0.9;
 
-  // Update each bar with the corresponding row data
+  function normalizeData(dataArray, dataKey) {
+    let minVal = Infinity;
+    let maxVal = -Infinity;
+
+    for (const entry of dataArray) {
+      const val = parseFloat(String(entry[dataKey]).replace(/[^\d.-]/g, ''));
+      minVal = Math.min(minVal, val);
+      maxVal = Math.max(maxVal, val);
+    }
+
+    if (minVal === maxVal) {
+      maxVal = minVal + 1;
+    }
+
+    return dataArray.map(entry => {
+      const val = parseFloat(String(entry[dataKey]).replace(/[^\d.-]/g, ''));
+      let normalizedVal = (val - minVal) / (maxVal - minVal);
+      console.log(normalizedVal * (desiredMax - desiredMin) + desiredMin);
+      return normalizedVal * (desiredMax - desiredMin) + desiredMin;
+    });
+  }
+
+  const normalizedTemps = normalizeData(data, 'temperatura');
+  const normalizedLuz = normalizeData(data, 'intensitat');
+  const normalizedEnergia = normalizeData(data, 'produccio');
+  console.log(data.length);
   for (let i = 0; i < data.length; i++) {
-    const entry = data[i];
-    const temperature = parseFloat(String(entry.temperatura).replace(/[^\d.-]/g, ''));
-    const tempNormalized = Math.min(Math.max((temperature + 50) / 100, 0), 1) * 1; 
-
-    const luzInt = parseFloat(String(entry.intensitat).replace(/[^\d.-]/g, ''));
-    const luzNormalized = Math.min(Math.max(luzInt / 100, 0), 1) * 1; 
-
-    const energiaInt = parseFloat(String(entry.produccio).replace(/[^\d.-]/g, ''));
-    const energiaNormalized = Math.min(Math.max(energiaInt / 100, 0), 1) * 1; 
-
-    tempRows[i].querySelector('td').style.setProperty('--size', tempNormalized);
-    luzRows[i].querySelector('td').style.setProperty('--size', luzNormalized);
-    energiaRows[i].querySelector('td').style.setProperty('--size', energiaNormalized);
+    tempRows[i].querySelector('td').style.setProperty('--size', normalizedTemps[i]);
+    luzRows[i].querySelector('td').style.setProperty('--size', normalizedLuz[i]);
+    energiaRows[i].querySelector('td').style.setProperty('--size', normalizedEnergia[i]);
   }
 }
 
-
-prevButton.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + dots.length) % dots.length;
-  updateDots();
-  updateCharts();
-});
-
-nextButton.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % dots.length;
-  updateDots();
-  updateCharts();
-});
-
-updateDots();
-updateCharts();
 updateChartData(data);
 
 
-// ...existing code...
+const chartDots = document.querySelectorAll('.menu .dot');
+const prevChartButton = document.querySelector('.menu #prev');
+const nextChartButton = document.querySelector('.menu #next');
+const charts = document.querySelectorAll('.my-chart');
+
+let currentChartIndex = 0;
+
+function updateChartDots() {
+  chartDots.forEach((dot, index) => {
+    dot.classList.toggle('active', index === currentChartIndex);
+  });
+}
+
+function updateCharts() {
+  charts.forEach((chart, index) => {
+    chart.style.display = index === currentChartIndex ? 'block' : 'none';
+  });
+}
+
+prevChartButton.addEventListener('click', () => {
+  currentChartIndex = (currentChartIndex - 1 + chartDots.length) % chartDots.length;
+  updateChartDots();
+  updateCharts();
+});
+
+nextChartButton.addEventListener('click', () => {
+  currentChartIndex = (currentChartIndex + 1) % chartDots.length;
+  updateChartDots();
+  updateCharts();
+});
+
+updateChartDots();
+updateCharts();
+
 
 const tableDots = document.querySelectorAll('.menuTables .dot');
 const prevTableButton = document.querySelector('.menuTables #prev');

@@ -147,10 +147,11 @@
     <?php
         // sqlite connection
         $db = new PDO('sqlite:' . 'solar.db');
-        $hour = '12:00:00'; // Specify the hour you want to fetch data for
-        $hour_start = '11:30:00'; // Start of the range
-        $hour_end = '11:35:00'; // End of the range
-        $res = $db->query("SELECT * FROM lectures WHERE hora BETWEEN '$hour_start' AND '$hour_end' ORDER BY data DESC LIMIT 120");
+        date_default_timezone_set('Europe/Madrid'); // Set timezone to Madrid
+
+        $hour_start = date('H:i:s'); // Current time
+        $hour_end = date('H:i:s', strtotime('+5 minutes')); // Current time + 5 minutes
+        $res = $db->query("SELECT * FROM lectures WHERE hora BETWEEN '$hour_start' AND '$hour_end' ORDER BY data DESC LIMIT 5");
         $rows = $res->fetchAll(PDO::FETCH_ASSOC);
         // for js
         $data = json_encode($rows);
@@ -158,6 +159,7 @@
     <script>
         // inner html with php
         var data = <?php echo $data; ?>;
+        console.log(data);
         
         document.getElementById('tempValue').innerHTML += Math.round(data[0].temperatura);
         document.getElementById('luzValue').innerHTML += Math.round(data[0].intensitat);
