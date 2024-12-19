@@ -76,25 +76,72 @@
                 </div>
             </div>
             <div id="tableContainer">
-                <table class="tables">
-                    <tr>
-                        <th>Data</th>
-                        <th>Temperatura</th>
-                    </tr>
-                    <?php
-                        // sqlite connection
-                        $db = new PDO('sqlite:' . 'solar.db');
-                        $res = $db->query("SELECT * FROM lectures ORDER BY data DESC");
-                        $rows = $res->fetchAll(PDO::FETCH_ASSOC);
-                        foreach ($rows as $row) {
-                            echo "<tr>";
-                            echo "<td>" . $row['data']." - ". $row['hora'] . "</td>";
-                            echo "<td>" . $row['temperatura'] . "</td>";
-                            echo "</tr>";
-                        }   
-                    ?>
-                </table>
-            </div>
+                <div id="tables">
+                    <table class="tables" id="tableTemp">
+                        <tr>
+                            <th>Data</th>
+                            <th>Temperatura</th>
+                        </tr>
+                        <?php
+                            // sqlite connection
+                            $db = new PDO('sqlite:' . 'solar.db');
+                            $res = $db->query("SELECT * FROM lectures ORDER BY data DESC");
+                            $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($rows as $row) {
+                                echo "<tr>";
+                                echo "<td>" . $row['data']." - ". $row['hora'] . "</td>";
+                                echo "<td>" . number_format($row['temperatura'], 5) . " °C" . "</td>";
+                                echo "</tr>";
+                            }   
+                        ?>
+                    </table>
+                    <table class="tables" id="tableLuz" style="display: none;">
+                        <tr>
+                            <th>Data</th>
+                            <th>Llum solar rebuda</th>
+                        </tr>
+                        <?php
+                            // sqlite connection
+                            $db = new PDO('sqlite:' . 'solar.db');
+                            $res = $db->query("SELECT * FROM lectures ORDER BY data DESC");
+                            $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($rows as $row) {
+                                echo "<tr>";
+                                echo "<td>" . $row['data']." - ". $row['hora'] . "</td>";
+                                echo "<td>" . number_format($row['intensitat'], 3) . " W/m2" . "</td>";
+                                echo "</tr>";
+                            }   
+                        ?>
+                    </table>
+                    <table class="tables" id="tableEnergia" style="display: none;">
+                        <tr>
+                            <th>Data</th>
+                            <th>Producció</th>
+                        </tr>
+                        <?php
+                            // sqlite connection
+                            $db = new PDO('sqlite:' . 'solar.db');
+                            $res = $db->query("SELECT * FROM lectures ORDER BY data DESC");
+                            $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($rows as $row) {
+                                echo "<tr>";
+                                echo "<td>" . $row['data']." - ". $row['hora'] . "</td>";
+                                echo "<td>" . number_format($row['produccio'], 3) . " W" . "</td>";
+                                echo "</tr>";
+                            }   
+                        ?>
+                    </table>
+                </div>
+                <div class="menuTables">
+                        <button class="arrow" id="prev">&larr;</button>
+                        <div class="dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                        <button class="arrow" id="next">&rarr;</button>
+                </div>
+            </div>    
         </div>
     </div>
     <?php

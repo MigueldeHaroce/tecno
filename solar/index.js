@@ -65,3 +65,40 @@ nextButton.addEventListener('click', () => {
 updateDots();
 updateCharts();
 updateChartData(data);
+
+
+// ...existing code...
+
+const tableDots = document.querySelectorAll('.menuTables .dot');
+const prevTableButton = document.querySelector('.menuTables #prev');
+const nextTableButton = document.querySelector('.menuTables #next');
+const tables = [document.getElementById('tableTemp'), document.getElementById('tableLuz'), document.getElementById('tableEnergia')];
+
+let currentTableIndex = 0;
+
+function updateTableDots() {
+  tableDots.forEach((dot, index) => {
+    dot.classList.toggle('active', index === currentTableIndex);
+  });
+}
+
+function updateTables() {
+  tables.forEach((table, index) => {
+    table.style.display = index === currentTableIndex ? 'table' : 'none';
+  });
+}
+
+prevTableButton.addEventListener('click', () => {
+  currentTableIndex = (currentTableIndex - 1 + tableDots.length) % tableDots.length;
+  updateTableDots();
+  updateTables();
+});
+
+nextTableButton.addEventListener('click', () => {
+  currentTableIndex = (currentTableIndex + 1) % tableDots.length;
+  updateTableDots();
+  updateTables();
+});
+
+updateTableDots();
+updateTables();
