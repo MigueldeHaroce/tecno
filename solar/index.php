@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
 
@@ -166,6 +165,5 @@
         document.getElementById('energiaValue').innerHTML += Math.round(data[0].produccio);
     </script>
     <script src="index.js"></script>
-    <script src="ajax.js"></script>
 </body>
 </html>
