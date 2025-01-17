@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+:root {
+    --text: #10170d;
+    --background: #ECF5F4;
+    --primary: #74ab63;
+    --secondary: #a0cac8;
+    --terciary: rgba(160, 203, 200, 0.2);
+    --quaternary: #DDEDEB;
+    --accent: #88ABBE;
+
+}
+
+body {
+    font-family: 'Inter', sans-serif; 
+    overflow: hidden;
+    background-color: var(--background-color);
+    color: var(--text);
+    margin: 0px;
+    font-size: 40px;
+    user-select: none;
+
+}
+
+#mainContainer {
+    font-family: 'Inter', sans-serif; 
+
+    margin: 50px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--terciary);
+    border-radius: 32px;
+}
+
+#header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 90%;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+#andorraBanner {
+    width: 250px;
+    height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#clases {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 301px;
+    height: 42px;
+    background-color: var(--accent);
+    font-size: 24px;
+    border-radius: 25px;
+}
+
+#inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    padding: 10px;
+    gap: 42px;
+}
+
+#name {
+    background-color: var(--accent);
+    height: 115px;
+    width: max;
+    outline: none;
+    border-radius: 25px;
+    font-size: 40px;
+    padding-left: 40px;
+    border: none;
+}
+
+.clase {
+    background-color: var(--accent);
+    height: 115px;
+    width: 135px;
+    border-radius: 25px;
+    font-size: 40px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.clase:hover {
+    opacity: 0.8;;
+}
+
+.clase:active {
+    opacity: 0.6;
+}
+
+#activitats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    gap: 38px;
+    
+}
+
+
+.acts {
+    height: 115px;
+    width: 90%;
+    font-size: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.acts span {
+    margin-left: 30px;
+}
+
+#activitat1 {
+    background-color: var(--primary);
+    height: 115px;
+    border-radius: 25px 25px 0px 0px;
+    
+}
+
+#activitat2 {
+    background-color: var(--secondary);
+    height: 115px;
+    border-radius: 0px 0px 0px 0px;
+}
+
+#activitat3 {
+    background-color: var(--accent);
+    border-radius: 0px 0px 25px 25px;
+}
+
+
+
+.confirmBtn {
+    display: none;
+    padding: 10px 20px;
+    font-size: 32px;
+    background-color: #eaf7f1;
+    color: #000;
+    border: none;
+    border-radius: 42px;
+    cursor: pointer;
+    right: 20px;
+}
+
+.confirmBtn:hover {
+    background-color: #d4f0e4;
+}
+
+.confirmBtn:active {
+    background-color: #c1e9d8;
+}
+
+.acts.selected .confirmBtn {
+display: inline-block;
+}
+
+.circle {
+    background-color: var(--background);
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#selectors {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+    margin: 30px;
+}
+
+.circleSelected{
+    display: none;
+    background-color: var(--primary);
+    width: 15px;
+    height: 15px;
+    border-radius: 50px;
+}
+
+#circleSected1 {
+    background-color: var(--primary);
+}
+
+#circleSected2 {
+    background-color: var(--secondary);
+}
+
+#circleSected3 {
+    background-color: var(--accent);
+}
+
+.circle.selected .circleSelected {
+    display: flex !important;
+}
+
+#rightBtn {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background);
+    width: 20px;
+    height: 100px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    top: 50%;
+    right: 15px;
+}
+
+#rightBtn img {
+    width: 20px;
+    height: 20px;
+}
+
+#leftBtn {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background);
+    width: 20px;
+    height: 100px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    top: 50%;
+    left: 15px;
+}
+
+#leftBtn img {
+    rotate: 180deg;
+    width: 20px;
+    height: 20px;
+}

@@ -63,7 +63,22 @@
                 activityElement.querySelector('.circle').classList.add('selected');
             }
         </script>
+
         <script>
+            function selectActivity(activityElement) {
+                document.querySelectorAll('.acts').forEach(activity => {
+                    activity.classList.remove('selected');
+                });
+
+                activityElement.classList.add('selected');
+                
+                document.querySelectorAll('.circle').forEach(circle => {
+                    circle.classList.remove('selected');
+                });
+
+                activityElement.querySelector('.circle').classList.add('selected');
+            }
+
             document.addEventListener('DOMContentLoaded', function() {
                 const confirmButtons = document.querySelectorAll('.confirmBtn');
                 confirmButtons.forEach(button => {
@@ -71,7 +86,7 @@
                         const name = document.getElementById('name').value;
                         const selectedClass = document.querySelector('.clase.selected');
                         const selectedActivity = document.querySelector('.acts.selected');
-                        const taller = 'taller1';
+                        const taller = 'taller2';
 
                         if (!name) {
                             alert('Please enter your name.');
@@ -114,12 +129,15 @@
                         clase.classList.add('selected');
                     });
                 });
-                });
+            });
         </script>
-        <div id="rightBtn" onclick="location.href='taller2.php'">
+        <div id="rightBtn" onclick="location.href='taller3.php'">
+            <img id="btnIcon" src="right.svg"/>
+        </div>
+
+        <div id="leftBtn" onclick="location.href='index.php'">
             <img id="btnIcon" src="right.svg"/>
         </div>
     </div>
-
 </body>
 </html>
